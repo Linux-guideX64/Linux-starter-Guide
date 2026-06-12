@@ -6,363 +6,262 @@
 <title>Linux Starter Guide</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Segoe UI, sans-serif;
+    font-family:'Inter', sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#0f172a;
     color:white;
+    background: radial-gradient(circle at top left,#1e3a8a,transparent 40%),
+                radial-gradient(circle at bottom right,#0ea5e9,transparent 40%),
+                #0b1220;
+    overflow-x:hidden;
 }
 
+/* NAVBAR */
+.navbar{
+    position:sticky;
+    top:0;
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    padding:15px;
+    background:rgba(10,15,30,.7);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(255,255,255,.1);
+    z-index:1000;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+}
+
+.navbar a:hover{
+    color:#38bdf8;
+    transform:scale(1.1);
+}
+
+/* HERO */
 header{
-    background:linear-gradient(135deg,#2563eb,#06b6d4);
-    padding:80px 20px;
     text-align:center;
+    padding:120px 20px;
+    background: linear-gradient(135deg,#2563eb,#06b6d4);
+    position:relative;
+    overflow:hidden;
+}
+
+header::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    background:rgba(255,255,255,.15);
+    filter:blur(80px);
+    top:-100px;
+    left:-100px;
 }
 
 header h1{
-    font-size:3rem;
-    margin-bottom:10px;
+    font-size:3.5rem;
+    margin-bottom:15px;
+    animation:fadeUp 1s ease;
 }
 
 header p{
     font-size:1.2rem;
+    opacity:.9;
 }
 
+/* CONTAINER */
 .container{
     max-width:1200px;
     margin:auto;
-    padding:30px;
+    padding:40px 20px;
 }
 
 .section-title{
     text-align:center;
-    margin:40px 0;
-    font-size:2rem;
+    font-size:2.2rem;
+    margin:60px 0 30px;
 }
 
+/* GRID CARDS */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
 }
 
-.card{
-    background:#1e293b;
+.card, .youtube, .decision{
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:20px;
     padding:25px;
-    border-radius:15px;
+    transition:.4s;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    animation:fadeUp .8s ease;
+}
+
+.card:hover, .youtube:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 20px 50px rgba(56,189,248,.25);
+}
+
+/* BUTTON */
+.button{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 16px;
+    background:linear-gradient(135deg,#2563eb,#38bdf8);
+    border-radius:10px;
+    color:white;
+    text-decoration:none;
+    font-weight:600;
     transition:.3s;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-}
-
-.card h3{
-    margin-bottom:15px;
-}
-
-.card ul{
-    margin-left:20px;
-    margin-bottom:15px;
-}
-
-.button{
-    display:inline-block;
-    background:#2563eb;
-    color:white;
-    text-decoration:none;
-    padding:10px 18px;
-    border-radius:8px;
-}
-
 .button:hover{
-    background:#1d4ed8;
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(56,189,248,.5);
 }
 
-.youtube{
-    background:#1e293b;
-    margin-bottom:20px;
-    padding:20px;
-    border-radius:15px;
-}
-
+/* YOUTUBE */
 .youtube a{
     color:#38bdf8;
     text-decoration:none;
 }
 
-.youtube a:hover{
-    text-decoration:underline;
+/* FAQ */
+.faq{
+    display:grid;
+    gap:15px;
 }
 
-.decision{
-    background:#1e293b;
-    padding:30px;
-    border-radius:15px;
-    margin-top:30px;
-}
-
-.decision p{
-    margin:10px 0;
-}
-
+/* CONTACT */
 footer{
-    margin-top:50px;
     text-align:center;
-    padding:25px;
-    background:#111827;
+    padding:30px;
+    margin-top:60px;
+    background:rgba(0,0,0,.4);
+    border-top:1px solid rgba(255,255,255,.1);
 }
 
-html{scroll-behavior:smooth;}
-body{
-animation:pageLoad 1s ease;
-background:
-radial-gradient(circle at top left,#1e3a8a 0%,transparent 40%),
-radial-gradient(circle at bottom right,#0891b2 0%,transparent 40%),
-#0f172a !important;
-}
-@keyframes pageLoad{from{opacity:0;}to{opacity:1;}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-.card,.youtube,.guide,.contact,.stat{
-background:rgba(255,255,255,.08)!important;
-backdrop-filter:blur(18px);
--webkit-backdrop-filter:blur(18px);
-border:1px solid rgba(255,255,255,.15);
-box-shadow:0 8px 32px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.15);
-border-radius:24px;
-animation:fadeUp .8s ease;
-transition:transform .4s ease, box-shadow .4s ease, background .4s ease;
-}
-.card:hover,.youtube:hover,.guide:hover,.contact:hover,.stat:hover{
-transform:translateY(-8px);
-background:rgba(255,255,255,.12)!important;
-box-shadow:0 15px 40px rgba(0,0,0,.35),0 0 25px rgba(56,189,248,.25);
-}
-.button,.download-btn{transition:all .3s ease;}
-.button:hover,.download-btn:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,255,255,.4);}
-.hero h1{animation:glow 3s infinite alternate;}
-@keyframes glow{
-from{text-shadow:0 0 10px rgba(255,255,255,.2);}
-to{text-shadow:0 0 20px rgba(255,255,255,.6),0 0 40px rgba(255,255,255,.4);}
+/* ANIMATIONS */
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
+/* RESPONSIVE */
+@media(max-width:600px){
+    header h1{font-size:2.3rem;}
+}
 </style>
 </head>
+
 <body>
 
+<!-- NAV -->
+<div class="navbar">
+    <a href="#distros">Distros</a>
+    <a href="#videos">Videos</a>
+    <a href="#guide">Guide</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
 <header>
     <h1>Linux Starter Guide</h1>
-    <p>Find the best Linux distribution for your needs.</p>
+    <p>Modern. Beautiful. Simple way to choose your Linux system.</p>
 </header>
 
 <div class="container">
 
-<h2 class="section-title">Choose Your Linux Distribution</h2>
+<!-- DISTROS -->
+<h2 id="distros" class="section-title">Choose Your Linux Distribution</h2>
 
 <div class="grid">
 
 <div class="card">
 <h3>Ubuntu</h3>
-
-<p><strong>Best for:</strong></p>
-<ul>
-<li>Complete beginners</li>
-<li>Students</li>
-<li>Daily desktop use</li>
-<li>Windows switchers</li>
-</ul>
-
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Huge community</li>
-<li>Easy installation</li>
-<li>Lots of tutorials</li>
-</ul>
-
-<a class="button"
-href="https://ubuntu.com/download"
-target="_blank">
-Download Ubuntu
-</a>
+<p>Best for beginners and everyday users.</p>
+<a class="button" href="https://ubuntu.com/download" target="_blank">Download</a>
 </div>
 
 <div class="card">
 <h3>Linux Mint</h3>
-
-<p><strong>Best for:</strong></p>
-<ul>
-<li>Windows users</li>
-<li>Older computers</li>
-<li>Office work</li>
-</ul>
-
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Very stable</li>
-<li>Easy to learn</li>
-<li>Familiar interface</li>
-</ul>
-
-<a class="button"
-href="https://linuxmint.com/download.php"
-target="_blank">
-Download Mint
-</a>
+<p>Perfect Windows-like experience.</p>
+<a class="button" href="https://linuxmint.com/download.php" target="_blank">Download</a>
 </div>
 
 <div class="card">
 <h3>Zorin OS</h3>
-
-<p><strong>Best for:</strong></p>
-<ul>
-<li>Windows 10 users</li>
-<li>People wanting a modern UI</li>
-</ul>
-
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Beautiful design</li>
-<li>Easy migration</li>
-<li>Beginner friendly</li>
-</ul>
-
-<a class="button"
-href="https://zorin.com/os/download/"
-target="_blank">
-Download Zorin
-</a>
+<p>Beautiful and modern design.</p>
+<a class="button" href="https://zorin.com/os/download/" target="_blank">Download</a>
 </div>
 
 <div class="card">
-<h3>Fedora Workstation</h3>
-
-<p><strong>Best for:</strong></p>
-<ul>
-<li>Developers</li>
-<li>Advanced users</li>
-<li>GNOME fans</li>
-</ul>
-
-<p><strong>Pros:</strong></p>
-<ul>
-<li>Latest software</li>
-<li>Modern technologies</li>
-<li>Secure</li>
-</ul>
-
-<a class="button"
-href="https://fedoraproject.org/workstation/download"
-target="_blank">
-Download Fedora
-</a>
+<h3>Fedora</h3>
+<p>For developers and latest tech.</p>
+<a class="button" href="https://fedoraproject.org/workstation/download" target="_blank">Download</a>
 </div>
 
 </div>
 
-<h2 class="section-title">Recommended YouTube Channels</h2>
+<!-- VIDEOS -->
+<h2 id="videos" class="section-title">Recommended YouTube Channels</h2>
 
-<div class="youtube">
-<h3>Learn Linux TV</h3>
-<p>Perfect for Linux beginners.</p>
-<a href="https://www.youtube.com/@LearnLinuxTV" target="_blank">
-Open Channel
-</a>
-</div>
+<div class="youtube">Learn Linux TV — <a href="https://www.youtube.com/@LearnLinuxTV" target="_blank">Open</a></div>
+<div class="youtube">The Linux Experiment — <a href="https://www.youtube.com/@TheLinuxEXP" target="_blank">Open</a></div>
+<div class="youtube">DistroTube — <a href="https://www.youtube.com/@DistroTube" target="_blank">Open</a></div>
 
-<div class="youtube">
-<h3>The Linux Experiment</h3>
-<p>Linux reviews, news and tutorials.</p>
-<a href="https://www.youtube.com/@TheLinuxEXP" target="_blank">
-Open Channel
-</a>
-</div>
-
-<div class="youtube">
-<h3>DistroTube</h3>
-<p>Linux distribution reviews and customization.</p>
-<a href="https://www.youtube.com/@DistroTube" target="_blank">
-Open Channel
-</a>
-</div>
-
-<div class="youtube">
-<h3>Chris Titus Tech</h3>
-<p>Great Windows-to-Linux migration videos.</p>
-<a href="https://www.youtube.com/@ChrisTitusTech" target="_blank">
-Open Channel
-</a>
-</div>
-
-<h2 class="section-title">Quick Decision Guide</h2>
-
-<div class="decision">
-<p>👉 I want the easiest Linux possible → <strong>Ubuntu</strong></p>
-<p>👉 I want Linux that feels like Windows → <strong>Linux Mint</strong></p>
-<p>👉 I want a beautiful desktop → <strong>Zorin OS</strong></p>
-<p>👉 I want the newest software → <strong>Fedora</strong></p>
-<p>👉 My PC is old → <strong>Linux Mint XFCE</strong></p>
-</div>
-
-<h2 class="section-title">Frequently Asked Questions</h2>
+<!-- GUIDE -->
+<h2 id="guide" class="section-title">Quick Decision Guide</h2>
 
 <div class="card">
-<h3>Can I keep Windows?</h3>
-<p>Yes. You can install Linux alongside Windows using dual boot.</p>
-
-<br>
-
-<h3>Will my games work?</h3>
-<p>Most Steam games work through Proton.</p>
-
-<br>
-
-<h3>Do I need programming knowledge?</h3>
-<p>No. Modern Linux distributions are designed for normal users.</p>
-
-<br>
-
-<h3>Is Linux free?</h3>
-<p>Yes. All distributions listed here are free to download and use.</p>
+<p>👉 Beginner → Ubuntu</p>
+<p>👉 Like Windows → Linux Mint</p>
+<p>👉 Beautiful UI → Zorin OS</p>
+<p>👉 Latest software → Fedora</p>
 </div>
 
+<!-- FAQ -->
+<h2 id="faq" class="section-title">FAQ</h2>
 
-<h2 class="section-title">Contact the Author</h2>
+<div class="faq">
+<div class="card">✔ Yes, you can dual boot Linux + Windows</div>
+<div class="card">✔ Most Steam games work via Proton</div>
+<div class="card">✔ Linux is completely free</div>
+<div class="card">✔ No programming needed</div>
+</div>
+
+<!-- CONTACT -->
+<h2 id="contact" class="section-title">Contact</h2>
 
 <div class="card">
-    <h3>Need Help With Linux?</h3>
-
-    <p>
-        If you need help choosing a Linux distribution,
-        installing Linux, dual boot setup, gaming, drivers,
-        or have any Linux-related questions, feel free to contact me.
-    </p>
-
-    <br>
-
-    <p>
-        <strong>Email:</strong> m41621940@gmail.com
-    </p>
-
-    <br>
-
-    <a
-        class="button"
-        href="mailto:m41621940@gmail.com?subject=Linux%20Question"
-    >
-        Contact the Author
-    </a>
+<p>If you need help installing Linux or choosing distro:</p>
+<p><strong>Email:</strong> m41621940@gmail.com</p>
+<a class="button" href="mailto:m41621940@gmail.com">Send Email</a>
 </div>
-
 
 </div>
 
 <footer>
-Linux Starter Guide © 2026
+Linux Starter Guide © 2026 • Made with ❤️
 </footer>
 
 </body>
