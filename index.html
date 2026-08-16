@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINUX NEXUS — Світ Linux</title>
+<meta name="description" content="Linux Nexus — сучасний інтерактивний сайт про Linux, дистрибутиви, термінал та open source.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+  --bg:#070a0d; --panel:rgba(15,20,24,.72); --panel2:rgba(22,28,33,.72);
+  --text:#f1f5f2; --muted:#91a19a; --green:#72ff9d; --cyan:#64e9ff;
+  --border:rgba(255,255,255,.09); --shadow:0 25px 80px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-3;
+  background:
+   radial-gradient(circle at 15% 10%,rgba(114,255,157,.13),transparent 28%),
+   radial-gradient(circle at 85% 20%,rgba(100,233,255,.10),transparent 28%),
+   radial-gradient(circle at 50% 90%,rgba(114,255,157,.06),transparent 35%);
+}
+body:after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;opacity:.12;
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:45px 45px;mask-image:linear-gradient(to bottom,black,transparent 75%);
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1160px,92%);margin:auto}
+nav{
+  position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:50;
+  width:min(1080px,92%);padding:11px 14px;border:1px solid var(--border);
+  background:rgba(7,10,13,.68);backdrop-filter:blur(20px);border-radius:22px;
+  display:flex;align-items:center;justify-content:space-between;box-shadow:0 15px 45px rgba(0,0,0,.25)
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.5px}
+.logo{
+  width:36px;height:36px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--green),var(--cyan));color:#07100b;font-size:20px;
+  box-shadow:0 0 30px rgba(114,255,157,.3)
+}
+.links{display:flex;gap:5px}
+.links a{padding:9px 12px;color:#aeb9b4;font-size:13px;border-radius:12px;transition:.25s}
+.links a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-btn{border:1px solid rgba(114,255,157,.25);background:rgba(114,255,157,.08);color:var(--green);padding:9px 14px;border-radius:12px;font-weight:700;cursor:pointer}
+.hero{min-height:100vh;display:grid;place-items:center;padding:150px 0 90px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(114,255,157,.22);background:rgba(114,255,157,.06);color:var(--green);padding:8px 12px;border-radius:999px;font-size:12px;font-family:"JetBrains Mono",monospace;margin-bottom:24px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+h1{font-size:clamp(52px,8vw,105px);line-height:.86;letter-spacing:-6px;max-width:800px}
+.gradient{background:linear-gradient(100deg,#fff 15%,var(--green) 52%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:18px;line-height:1.7;color:var(--muted);max-width:650px;margin:28px 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:14px 20px;border-radius:15px;border:1px solid var(--border);font-weight:800;transition:.25s;cursor:pointer}
+.btn.primary{background:var(--green);color:#07100b;box-shadow:0 12px 35px rgba(114,255,157,.2)}
+.btn.secondary{background:rgba(255,255,255,.045)}
+.btn:hover{transform:translateY(-3px)}
+.terminal{
+  background:rgba(9,13,16,.88);border:1px solid var(--border);border-radius:25px;overflow:hidden;
+  box-shadow:var(--shadow);transform:rotate(1deg);animation:float 5s ease-in-out infinite
+}
+@keyframes float{50%{transform:translateY(-10px) rotate(-1deg)}}
+.term-top{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;gap:7px}
+.ball{width:10px;height:10px;border-radius:50%;background:#53605a}
+.term-body{padding:25px;font:14px/2 "JetBrains Mono",monospace;color:#c9d5cf}
+.prompt{color:var(--green)}.cmd{color:#fff}.cyan{color:var(--cyan)}
+.cursor{display:inline-block;width:8px;height:16px;background:var(--green);vertical-align:-3px;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+section{padding:105px 0}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}
+.kicker{color:var(--green);font:700 12px "JetBrains Mono";text-transform:uppercase;letter-spacing:2px}
+h2{font-size:clamp(34px,5vw,58px);letter-spacing:-3px;margin-top:10px}
+.section-head p{max-width:430px;color:var(--muted);line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+  position:relative;padding:27px;border:1px solid var(--border);border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  overflow:hidden;transition:.35s;min-height:220px
+}
+.card:before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:var(--green);filter:blur(80px);opacity:.07;right:-70px;top:-70px}
+.card:hover{transform:translateY(-7px);border-color:rgba(114,255,157,.25);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.icon{font-size:30px;margin-bottom:22px}.card h3{font-size:20px;margin-bottom:10px}.card p{color:var(--muted);line-height:1.65;font-size:14px}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:20px}.tag{font:11px "JetBrains Mono";padding:6px 9px;border:1px solid var(--border);border-radius:8px;color:#b8c5be}
+.distros{grid-template-columns:repeat(4,1fr)}
+.distro{min-height:190px}
+.distro .name{font-size:21px;font-weight:800}.distro .type{color:var(--green);font:11px "JetBrains Mono";margin:7px 0 14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:45px}
+.stat{padding:22px;border:1px solid var(--border);border-radius:18px;background:rgba(255,255,255,.025)}
+.stat b{font-size:30px;display:block}.stat span{font-size:12px;color:var(--muted)}
+.codebox{border:1px solid var(--border);border-radius:24px;background:#090d10;overflow:hidden;box-shadow:var(--shadow)}
+.codebar{padding:12px 17px;border-bottom:1px solid var(--border);color:#718079;font:12px "JetBrains Mono"}
+pre{padding:28px;overflow:auto;font:14px/1.8 "JetBrains Mono";color:#cbd5d0}
+.cta{border:1px solid rgba(114,255,157,.2);border-radius:30px;padding:55px;background:radial-gradient(circle at 80% 20%,rgba(114,255,157,.12),transparent 35%),rgba(255,255,255,.025);text-align:center}
+.cta p{color:var(--muted);max-width:600px;margin:15px auto 25px;line-height:1.7}
+footer{padding:35px 0 50px;color:#66736d;font-size:12px;display:flex;justify-content:space-between;border-top:1px solid var(--border)}
+.reveal{opacity:0;transform:translateY(25px);transition:.8s}.reveal.show{opacity:1;transform:none}
+#toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);opacity:0;background:#12191d;border:1px solid var(--border);padding:12px 18px;border-radius:14px;z-index:100;transition:.3s;font-size:13px}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){
+  .links{display:none}.hero-grid{grid-template-columns:1fr}.terminal{display:none}
+  .grid,.distros{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}
+  h1{letter-spacing:-4px}
+}
+@media(max-width:520px){
+  nav{top:10px}.grid,.distros,.stats{grid-template-columns:1fr}
+  section{padding:75px 0}.hero{padding-top:120px}.section-head{display:block}
+  h1{font-size:57px}.hero p{font-size:16px}.cta{padding:35px 20px}
+  footer{display:block}.footer-right{margin-top:8px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="#"><span class="logo">🐧</span> LINUX NEXUS</a>
+  <div class="links">
+    <a href="#about">Про Linux</a><a href="#distros">Дистрибутиви</a><a href="#terminal">Термінал</a><a href="#open">Open Source</a><a href="#community">Спільнота</a><a href="#contact">Контакт</a>
+  </div>
+  <button class="nav-btn" onclick="copyCommand()">$ sudo linux</button>
+</nav>
+
+<header class="hero">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="badge"><span class="dot"></span> SYSTEM ONLINE · OPEN SOURCE</div>
+      <h1>Свобода.<br><span class="gradient">Код.</span><br>Linux.</h1>
+      <p>Не просто операційна система. Це екосистема, де ти сам вирішуєш, як працює твій комп'ютер — від ядра до останньої кнопки.</p>
+      <div class="actions">
+        <a class="btn primary" href="#distros">Обрати дистрибутив →</a>
+        <a class="btn secondary" href="#terminal">Відкрити термінал</a>
+      </div>
+    </div>
+    <div class="terminal reveal">
+      <div class="term-top"><span class="ball"></span><span class="ball"></span><span class="ball"></span></div>
+      <div class="term-body">
+        <div><span class="prompt">user@linux</span>:~$ <span class="cmd">neofetch</span></div>
+        <div class="cyan">        .--.        OS: Linux</div>
+        <div class="cyan">       |o_o |       Kernel: 6.x</div>
+        <div class="cyan">       |:_/ |       Shell: bash</div>
+        <div>      //   \ \      DE: Your Choice</div>
+        <div>     (|     | )     Uptime: forever*</div>
+        <div>    /'\_   _/`\</div>
+        <div>    \___)=(___/</div>
+        <br>
+        <div><span class="prompt">user@linux</span>:~$ <span class="cmd">echo "Welcome to Linux"</span></div>
+        <div>Welcome to <span class="gradient">Linux</span><span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="about">
+<div class="container">
+  <div class="section-head reveal">
+    <div><div class="kicker">01 / philosophy</div><h2>Чому Linux?</h2></div>
+    <p>Linux дає контроль, прозорість і свободу. Обирай середовище, налаштовуй систему та використовуй її так, як хочеш.</p>
+  </div>
+  <div class="grid">
+    <article class="card reveal"><div class="icon">⚡</div><h3>Швидкість</h3><p>Легка система без зайвого навантаження. Підходить і для старого ноутбука, і для потужної робочої станції.</p><div class="tags"><span class="tag">FAST</span><span class="tag">LIGHT</span></div></article>
+    <article class="card reveal"><div class="icon">🔓</div><h3>Свобода</h3><p>Відкритий код, величезна екосистема та можливість змінювати практично кожен компонент системи.</p><div class="tags"><span class="tag">OPEN SOURCE</span><span class="tag">GNU</span></div></article>
+    <article class="card reveal"><div class="icon">🛡️</div><h3>Контроль</h3><p>Ти вирішуєш, що запускається, як виглядає робочий стіл і які сервіси працюють у фоні.</p><div class="tags"><span class="tag">PRIVACY</span><span class="tag">CONTROL</span></div></article>
+  </div>
+</div>
+</section>
+
+<section id="distros">
+<div class="container">
+  <div class="section-head reveal">
+    <div><div class="kicker">02 / choose your system</div><h2>Дистрибутиви</h2></div>
+    <p>У Linux немає «одного правильного» варіанту. Ось чотири популярні напрямки, з яких можна почати.</p>
+  </div>
+  <div class="grid distros">
+    <article class="card distro reveal"><div class="icon">🟠</div><div class="name">Ubuntu</div><div class="type">BEGINNER FRIENDLY</div><p>Зручний старт, величезна спільнота та багато готових рішень.</p></article>
+    <article class="card distro reveal"><div class="icon">🔵</div><div class="name">Fedora</div><div class="type">MODERN</div><p>Свіжі технології Linux, чистий GNOME та чудова база для розробки.</p></article>
+    <article class="card distro reveal"><div class="icon">🔷</div><div class="name">Arch Linux</div><div class="type">DIY / POWER USER</div><p>Мінімалізм, контроль і принцип «збери систему під себе».</p></article>
+    <article class="card distro reveal"><div class="icon">🟢</div><div class="name">Linux Mint</div><div class="type">EASY & COMFORT</div><p>Знайомий робочий стіл та простий перехід із Windows.</p></article>
+    <article class="card distro reveal"><div class="icon">🔴</div><div class="name">Debian</div><div class="type">STABLE</div><p>Надійний та перевірений часом дистрибутив із величезними репозиторіями.</p></article>
+    <article class="card distro reveal"><div class="icon">🟣</div><div class="name">Kali Linux</div><div class="type">SECURITY</div><p>Дистрибутив для кібербезпеки, тестування та аналізу систем.</p></article>
+    <article class="card distro reveal"><div class="icon">⚫</div><div class="name">openSUSE</div><div class="type">POWERFUL</div><p>Потужна система з YaST та зручними інструментами адміністрування.</p></article>
+    <article class="card distro reveal"><div class="icon">🟡</div><div class="name">Manjaro</div><div class="type">ARCH BASED</div><p>Зручний спосіб отримати Arch-подібний досвід без складного старту.</p></article>
+    <article class="card distro reveal"><div class="icon">🟥</div><div class="name">Pop!_OS</div><div class="type">DESKTOP / DEV</div><p>Сучасний Ubuntu-based дистрибутив для роботи, навчання та ігор.</p></article>
+    <article class="card distro reveal"><div class="icon">🟤</div><div class="name">Gentoo</div><div class="type">ADVANCED</div><p>Максимальний контроль над системою та можливість збирати її під себе.</p></article>
+    <article class="card distro reveal"><div class="icon">🟦</div><div class="name">Zorin OS</div><div class="type">WINDOWS ALTERNATIVE</div><p>Дружній інтерфейс для тих, хто переходить із Windows або macOS.</p></article>
+    <article class="card distro reveal"><div class="icon">🐉</div><div class="name">EndeavourOS</div><div class="type">ARCH BASED</div><p>Ближчий до чистого Arch Linux, але з простішим встановленням.</p></article>
+    <article class="card distro reveal"><div class="icon">🌀</div><div class="name">Debian</div><div class="type">STABLE</div><p>Надійний та перевірений часом дистрибутив із величезною екосистемою.</p></article>
+    <article class="card distro reveal"><div class="icon">💠</div><div class="name">Manjaro</div><div class="type">ARCH BASED</div><p>Зручніший вхід у світ Arch із готовим графічним середовищем.</p></article>
+    <article class="card distro reveal"><div class="icon">⚫</div><div class="name">Kali Linux</div><div class="type">SECURITY</div><p>Спеціалізований дистрибутив для кібербезпеки, тестування та аудиту.</p></article>
+    <article class="card distro reveal"><div class="icon">🟣</div><div class="name">Pop!_OS</div><div class="type">DESKTOP / GAMING</div><p>Сучасний Linux для роботи, навчання, програмування та ігор.</p></article>
+    <article class="card distro reveal"><div class="icon">🔴</div><div class="name">openSUSE</div><div class="type">POWERFUL</div><p>Потужний інструментарій адміністрування та два різні підходи: Leap і Tumbleweed.</p></article>
+    <article class="card distro reveal"><div class="icon">🩵</div><div class="name">EndeavourOS</div><div class="type">ARCH / SIMPLE</div><p>Ближчий до чистого Arch, але з комфортнішим встановленням і налаштуванням.</p></article>
+    <article class="card distro reveal"><div class="icon">🌌</div><div class="name">NixOS</div><div class="type">DECLARATIVE</div><p>Унікальний підхід до конфігурації системи з відтворюваними налаштуваннями.</p></article>
+    <article class="card distro reveal"><div class="icon">🟥</div><div class="name">Alpine Linux</div><div class="type">MINIMAL</div><p>Надзвичайно легкий дистрибутив, популярний у серверах і контейнерах.</p></article>
+  </div>
+</div>
+</section>
+
+<section id="terminal">
+<div class="container">
+  <div class="section-head reveal">
+    <div><div class="kicker">03 / command line</div><h2>Термінал — суперсила</h2></div>
+    <p>Кілька команд можуть зробити те, на що графічному інтерфейсу потрібні десятки кліків.</p>
+  </div>
+  <div class="codebox reveal">
+    <div class="codebar">~/linux-nexus · bash</div>
+<pre><span style="color:#72ff9d">$</span> <span style="color:#fff">sudo pacman -Syu</span>
+<span style="color:#68766f"># Оновити систему (Arch / EndeavourOS / Manjaro)</span>
+
+<span style="color:#72ff9d">$</span> <span style="color:#fff">fastfetch</span>
+<span style="color:#64e9ff">OS</span>        Linux
+<span style="color:#64e9ff">Kernel</span>    6.x
+<span style="color:#64e9ff">Shell</span>     bash / zsh / fish
+<span style="color:#64e9ff">Freedom</span>   100%
+
+<span style="color:#72ff9d">$</span> <span style="color:#fff">sudo reboot</span>
+<span style="color:#68766f"># And the adventure continues...</span></pre>
+  </div>
+  <div class="stats">
+    <div class="stat reveal"><b>∞</b><span>можливостей кастомізації</span></div>
+    <div class="stat reveal"><b>100%</b><span>відкритої філософії</span></div>
+    <div class="stat reveal"><b>1</b><span>ядро, мільйони систем</span></div>
+    <div class="stat reveal"><b>24/7</b><span>активна спільнота</span></div>
+  </div>
+</div>
+</section>
+
+<section id="open">
+<div class="container">
+  <div class="cta reveal">
+    <div class="kicker">04 / open source</div>
+    <h2>Build your own world.</h2>
+    <p>Вивчай Linux, експериментуй, ламай, відновлюй і створюй. Найкращий спосіб зрозуміти систему — почати її використовувати.</p>
+    <a class="btn primary" href="#about">Почати подорож →</a>
+  </div>
+</div>
+</section>
+
+<section id="community">
+<div class="container">
+  <div class="section-head reveal">
+    <div><div class="kicker">05 / community</div><h2>Linux-спільнота</h2></div>
+    <p>Приєднуйся до спільноти, стеж за новинами Linux та знаходь корисні матеріали.</p>
+  </div>
+  <div class="grid">
+    <a class="card reveal" href="https://t.me/distrolinux6" target="_blank" rel="noopener">
+      <div class="icon">✈️</div><h3>Telegram</h3>
+      <p>Наш Telegram-канал — новини, дистрибутиви, налаштування та Linux-контент.</p>
+      <div class="tags"><span class="tag">TELEGRAM</span><span class="tag">JOIN →</span></div>
+    </a>
+    <a class="card reveal" href="https://www.youtube.com/@Linuxuser-l4o" target="_blank" rel="noopener">
+      <div class="icon">▶️</div><h3>YouTube</h3>
+      <p>Відео про Linux, дистрибутиви, налаштування та цікаві експерименти.</p>
+      <div class="tags"><span class="tag">YOUTUBE</span><span class="tag">WATCH →</span></div>
+    </a>
+  </div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+  <div class="cta reveal">
+    <div class="kicker">06 / creator</div>
+    <h2>Зв'язок із творцем</h2>
+    <p>Є ідея, пропозиція або хочеш зв'язатися з автором проєкту? Напиши мені напряму через Gmail або приєднуйся до наших каналів.</p>
+    <div class="actions" style="justify-content:center">
+      <a class="btn primary" href="mailto:m41621940@gmail.com?subject=Linux%20Nexus%20—%20повідомлення%20творцю">✉ Написати творцю →</a>
+      <a class="btn secondary" href="https://t.me/distrolinux6" target="_blank" rel="noopener">✈ Telegram</a>
+      <a class="btn secondary" href="https://www.youtube.com/@Linuxuser-l4o" target="_blank" rel="noopener">▶ YouTube</a>
+      <button class="btn secondary" onclick="copyEmail()">m41621940@gmail.com</button>
+    </div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<footer class="container">
+  <div>© 2026 LINUX NEXUS · Built with freedom.</div>
+  <div class="footer-right">🐧 Powered by Linux · Open Source Spirit</div>
+</footer>
+<div id="toast">Команду скопійовано!</div>
+
+<script>
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+function showToast(text){
+  const t=document.getElementById('toast');
+  t.textContent=text;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+function copyCommand(){
+  navigator.clipboard?.writeText('sudo linux');
+  showToast('Команду скопійовано!');
+}
+function copyEmail(){
+  navigator.clipboard?.writeText('m41621940@gmail.com');
+  showToast('Email скопійовано!');
+}
+</script>
+</body>
+</html>
